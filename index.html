@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="assets/js/scriptIndex.js"></script>
+</head>
+<body>
+    <form>
+        <input type="text" id="nombre" placeholder="Ingresa tu nombre"/><br/>
+        <p id="errorNombre"></p>
+        <input type="text" id="apellido" placeholder="Ingresa tu apellido"/><br/>
+        <p id="errorApellido"></p>
+        <button type="button" onclick="validar()">Registrar</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Accion</th>
+            </tr>
+        </thead>
+        <tbody id="tablaPersonas">
+            
+        </tbody>
+    </table>
+
+    <form>
+        <input type="text" id="nombre1" placeholder="Ingresa tu nombre"/><br/>
+        <input type="text" id="apellido1" placeholder="Ingresa tu apellido"/><br/>
+        <button type="button" onclick="actualizar()" id="btnActualizar">Actualizar</button>
+    </form>
+</body>
+</html>
