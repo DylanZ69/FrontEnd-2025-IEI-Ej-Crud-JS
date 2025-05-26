@@ -3,12 +3,16 @@ function validar(){
     let eNombre = document.getElementById("nombre")
     let vNombre = eNombre.value
     let eErrorNombre = document.getElementById("errorNombre")
+
     let eApellido = document.getElementById("apellido")
     let vApellido = eApellido.value
     let eErrorApellido = document.getElementById("errorApellido")
-    let fNombre = validarLargoMinimo(eNombre,vNombre,eErrorNombre)
-    let fApellido = validarLargoMinimo(eApellido,vApellido,eErrorApellido)
-    if(fNombre == "exito" && fApellido == "exito"){
+
+
+    let fNombre = validarLargoMinMax(eNombre,vNombre,eErrorNombre)
+    let fApellido = validarLargoMinMax(eApellido,vApellido,eErrorApellido)
+
+    if(fNombre == "exito" && fApellido  == "exito"){
         let p = {
             nombre:vNombre,
             apellido:vApellido
@@ -21,11 +25,11 @@ function validar(){
     }
 
 }
-function validarLargoMinimo(elemento,valor,eError){
-    if(valor.length < 3 ){
-        console.log("Pocos caracteres")
-        alert("Debes ingresar mas de 3 caracteres")
-        eError.innerText = "Debes ingresar mas de 3 caracteres!"
+function validarLargoMinMax(elemento,valor,eError){
+    if(valor.length < 3  || valor.length > 20){
+        console.log("Porfavor respete los rangos minimos(3) y maximos(20)")
+        alert("Debes ingresar como minimo 3 carateres y maximo 20")
+        eError.innerText = "Debes ingresar como minimo 3 carateres y maximo 20"
         elemento.style.backgroundColor = "red"
         elemento.style.color = "white"
         return "falla"
@@ -49,7 +53,6 @@ function cargarDatos(){
     tablaPersonas.innerHTML = strTablaPersonas 
     console.log(mapPersonas)
 }
-
 function eliminar(indice){
     personas = personas.filter((p,index)=>{
         if(index != indice){ /*mantengo las personas que no tienen el indice */
@@ -76,19 +79,32 @@ function actualizarFormulario(indice){
 function actualizar(){
     let eNombre = document.getElementById("nombre1")
     let vNombre = eNombre.value
+    let eErrorNombre = document.getElementById("errorNombre1")
+
     let eApellido = document.getElementById("apellido1")
     let vApellido = eApellido.value
+    let eErrorApellido = document.getElementById("errorApellido1")
+
     let btnActualizar = document.getElementById("btnActualizar")
     let indice = btnActualizar.value
-    personas = personas.map((p,index)=>{
-        if(index == indice){
-            return {
-                nombre:vNombre,
-                apellido:vApellido
+
+    let fNombre = validarLargoMinMax(eNombre, vNombre, eErrorNombre)
+    let fApellido = validarLargoMinMax(eApellido, vApellido, eErrorApellido)
+
+    if( fNombre == "exito" && fApellido == "exito"){
+        personas = personas.map((p,index)=>{
+            if(index == indice){
+                return {
+                    nombre:vNombre,
+                    apellido:vApellido
+                }
+            }else{
+                return p
             }
-        }else{
-            return p
-        }
-    })
-    cargarDatos()
+        })
+        cargarDatos()
+        eNombre.value = ""
+        eApellido.value = ""
+    }
 }
+
